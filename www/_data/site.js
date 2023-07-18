@@ -24,7 +24,7 @@ module.exports = {
   title: process.env.SITE_NAME,
   description: process.env.SITE_DESCRIPTION,
   url: new URL(process.env.URL).origin,
-  logo: "/images/author.jpeg",
+  logo: "/images/avatar-tt-400.png",
   author: {
     name: process.env.AUTHOR_NAME,
     email: process.env.AUTHOR_EMAIL,
