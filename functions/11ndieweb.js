@@ -1,4 +1,4 @@
-const options = {"functionsDirectory":"functions","dataDirectory":"www/_data","acceptedDomains":["11ndieweb.netlify.app"],"tokenEndpoint":"https://tokens.indieauth.com/token"};
+const options = {"functionsDirectory":"functions","dataDirectory":"www/_data","acceptedDomains":["fluffy-lily-cef646.netlify.app","monrepos.online"],"tokenEndpoint":"https://tokens.indieauth.com/token"};
 const indieweb = require("eleventy-plugin-11ndieweb");
 
 function getGithubInfo(info) {
