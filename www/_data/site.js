@@ -21,7 +21,7 @@ function getGithubInfo(info) {
 }
 
 module.exports = {
-  title: process.env.SITE_NAME,
+  title: process.env.SITE_TITLE,
   description: process.env.SITE_DESCRIPTION,
   url: new URL(process.env.URL).origin,
   logo: "/images/avatar-tt-400.png",
