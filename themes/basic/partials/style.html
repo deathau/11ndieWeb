@@ -200,6 +200,14 @@
   .commenter {
     text-decoration: none;
     color: var(--text-main);
+    display: inline-block;
+    position: relative;
+  }
+  .like-of::after {
+    content: "⭐️";
+    position: absolute;
+    right: 0;
+    bottom: 0;
   }
   .reactions {
     text-align: right;
