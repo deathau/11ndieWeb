@@ -23,8 +23,10 @@ function getGithubInfo(info) {
 module.exports = {
   title: process.env.SITE_TITLE,
   description: process.env.SITE_DESCRIPTION,
+  full_url: process.env.URL,
   url: new URL(process.env.URL).origin,
-  logo: "/images/avatar-tt-400.png",
+  domain: new URL(process.env.URL).hostname,
+  logo: "/images/avatar-tt.svg",
   author: {
     name: process.env.AUTHOR_NAME,
     email: process.env.AUTHOR_EMAIL,

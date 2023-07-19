@@ -11,13 +11,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>{% if title %}{{ title }}{% else %}{{fallbackTitle | strip_html }}{% endif %}</title>
     <meta name="description" content="{{ site.description }}">
-    <link rel="icon" href="/favicon.svg">
+    <link rel="icon" type="image/svg+xml" href="/assets/img/avatar-tt.svg">
+    <link rel="icon" type="image/png" href="/assets/img/avatar-tiny.png">
     
     <!--IndieWeb-->
     <link rel="authorization_endpoint" href="https://indieauth.com/auth">
     <link rel="token_endpoint" href="https://tokens.indieauth.com/token">
     <link rel="webmention" href="/11ndieweb/webmention">
     <link rel="micropub" href="/11ndieweb/micropub">
+  	<link rel="alternate" type="application/activity+json" href="https://fed.brid.gy/r/{{site.full_url}}">
     <!--Style-->
     {% include partials/style.html %}
   </head>
