@@ -9,7 +9,12 @@
                     <h2>Reactions</h2>
                     {% assign reaction_counter = 1 %}
                 {% endif %}
-                {% if webmention.author.url %}<a rel="nofollow" class="commenter" href="{{ webmention.author.url }}" title="{{ webmention.author.name }}, {{webmention.wm-property}}">{% endif %}{% if webmention.author.photo %}<img class="avatar" src="{{ webmention.author.photo }}" alt="{{ webmention.author.name }}">{% endif %}{% if webmention.author.url %}</a>{% endif %}
+                {% if webmention.author.url %}<a rel="nofollow" class="commenter" href="{{ webmention.author.url }}" title="{{ webmention.author.name }}, {{webmention.wm-property}}">{% endif %}
+                    {% if webmention.author.photo %}
+                        {% if webmention.author.photo[0].length > 1 %} <img class="avatar" src="{{ webmention.author.photo[0] }}" alt="{{ webmention.author.name }}">
+                        {% else %} <img class="avatar" src="{{ webmention.author.photo }}" alt="{{ webmention.author.name }}">{% endif %}
+                    {% endif %}
+                {% if webmention.author.url %}</a>{% endif %}
             {% endif %}
 <!--List Comments-->
             {% if webmention['wm-property'] == "in-reply-to" %}
@@ -19,7 +24,13 @@
                 {% endif %}
             <article>
                 <section class="webmention-author">
-                    <h3>{% if webmention.author.url %}<a rel="nofollow" class="commenter" href="{{ webmention.author.url }}">{% endif %}{% if webmention.author.photo %}<img class="avatar" src="{{ webmention.author.photo }}" alt="{{ webmention.author.name }}" width="36" height="36">{% endif %}{{ webmention.author.name }}{% if webmention.author.url %}</a>{% endif %}</h3>
+                    <h3>{% if webmention.author.url %}<a rel="nofollow" class="commenter" href="{{ webmention.author.url }}">{% endif %}
+                        {% if webmention.author.photo %}
+                            {% if webmention.author.photo[0].length > 1 %} <img class="avatar" src="{{ webmention.author.photo[0] }}" alt="{{ webmention.author.name }}" width="36" height="36">
+                            {% else %} <img class="avatar" src="{{ webmention.author.photo }}" alt="{{ webmention.author.name }}" width="36" height="36">{% endif %}
+                        {% endif %}
+                        {{ webmention.author.name }}{% if webmention.author.url %}
+                    </a>{% endif %}</h3>
                     <time><a rel="nofollow" href="{{ webmention.url }}">{{ webmention.published | date() }}</a></time>
                 </section>
                     {% if webmention.content.html %}<div>{{ webmention.content.html | safe }}</div>{% endif %}
