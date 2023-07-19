@@ -26,7 +26,7 @@ module.exports = {
   full_url: process.env.URL,
   url: new URL(process.env.URL).origin,
   domain: new URL(process.env.URL).hostname,
-  logo: "/images/avatar-tt.svg",
+  logo: "/images/avatar-tt@800.png",
   author: {
     name: process.env.AUTHOR_NAME,
     email: process.env.AUTHOR_EMAIL,
