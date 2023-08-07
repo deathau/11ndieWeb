@@ -2,6 +2,10 @@
 layout: layouts/note
 ---
 
+{% include partials/h-card.html %}
+{% assign author = site.author %}
+{% assign url = page.url %}
+{% include partials/authortime.liquid %}
 {% include partials/context-bookmark %}
 
 {{ content | safe }}

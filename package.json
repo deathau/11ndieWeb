@@ -4,7 +4,8 @@
   "description": "An 11ty starter site for the IndieWeb",
   "main": "index.js",
   "scripts": {
-    "test": "mocha"
+    "test": "mocha",
+    "run": "npx @11ty/eleventy --serve"
   },
   "repository": {
     "type": "git",
@@ -27,6 +28,7 @@
     "netlify-plugin-inline-functions-env": "^1.0.9"
   },
   "dependencies": {
+    "dotenv": "^16.3.1",
     "eleventy-plugin-11ndieweb": "^0.1.4"
   }
 }

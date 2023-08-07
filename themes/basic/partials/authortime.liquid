@@ -1,0 +1,12 @@
+<nav>
+  <ul><li>
+    <strong>{% if author.url %}<a rel="nofollow" class="commenter" href="{{ author.url }}">{% endif %}
+      {% if author.photo %}
+        {% if author.photo[0].length > 1 %} <img class="avatar" src="{{ author.photo[0] }}" alt="{{ author.name }}">
+        {% else %} <img class="avatar" src="{{ author.photo }}" alt="{{ author.name }}" >{% endif %}
+      {% endif %}
+      {{ author.name }}{% if author.url %}
+    </a>{% endif %}</strong>
+  </li></ul>
+  <ul><li>{% include partials/time %}</li></ul>
+</nav>

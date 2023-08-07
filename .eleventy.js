@@ -1,3 +1,4 @@
+require('dotenv').config()
 const site = require("./www/_data/site");
 const indieweb = require("eleventy-plugin-11ndieweb");
 
@@ -22,6 +23,18 @@ module.exports = function (eleventyConfig) {
       }
     });
   });
+
+  eleventyConfig.addFilter("wherenot", function (arr, key, value) {
+    return arr.filter(function (item) {
+      try {
+        let path = new URL(item[key]).pathname;
+        return path != value;
+      } catch(err) {
+        return item[key] != value;
+      }
+    });
+  });
+
   eleventyConfig.addFilter("relative", function (url) {
     url = new URL(url).pathname;
     return url;
@@ -38,9 +51,15 @@ module.exports = function (eleventyConfig) {
     if (date === "now") {
       date = new Date();
     }
+    if (!date || new Date(date).toJSON() === null) {
+      return ""
+    }
     if (format === "iso") {
       return new Date(date).toISOString();
-    } else {
+    } else if (format === "timestamp") {
+      return new Date(date).getTime()
+    }
+    else {
       return new Date(date).toDateString();
     }
   });

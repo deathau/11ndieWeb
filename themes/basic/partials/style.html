@@ -1,270 +1,114 @@
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@picocss/pico@1/css/pico.min.css">
 <style>
-  /*-------Variables-------*/
-  :root {
-    --text-main: #222;
-    --text-link: #0000c0;
-    --text-light: #666;
-    --text-pre-background: #e8edf2;
-    --background: #fff;
-    --width: 700px;
-  }
+/* Deep-purple Light scheme (Default) */
+/* Can be forced with data-theme="light" */
+[data-theme="light"],
+:root:not([data-theme="dark"]) {
+  --primary: hsl(260, 54%, 60%);
+  --primary-hover: hsl(258, 58%, 50%);
+  --primary-focus: rgba(94, 53, 177, 0.125);
+  --primary-inverse: #FFF;
+}
 
-  @media (prefers-color-scheme: dark) {
-    :root {
-      --text-main: #eee;
-      --text-link: #7474ff;
-      --text-light: #999;
-      --text-pre-background: #333;
-      --background: #000;
-      background: var(--background);
-    }
+/* Deep-purple Dark scheme (Auto) */
+/* Automatically enabled if user has Dark mode enabled */
+@media only screen and (prefers-color-scheme: dark) {
+  :root:not([data-theme]) {
+    --primary: hsl(260, 54%, 60%);
+    --primary-hover: hsl(258, 58%, 50%);
+    --primary-focus: rgba(94, 53, 177, 0.125);
+    --primary-inverse: #FFF;
   }
+}
 
-  body {
-    font-family: -apple-system, BlinkMacSystemFont, Helvetica, "Segoe UI",
-      Roboto, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
-      "Segoe UI Symbol";
-    line-height: 1.5;
-    margin: 0 auto;
-    margin-bottom: 1rem;
-    padding: 0 1em;
-    max-width: var(--width);
-    font-size: 1rem;
-    color: var(--text-main);
-    text-rendering: optimizeLegibility;
-  }
+/* Deep-purple Dark scheme (Forced) */
+/* Enabled if forced with data-theme="dark" */
+[data-theme="dark"] {
+  --primary: hsl(260, 54%, 60%);
+  --primary-hover: hsl(258, 58%, 50%);
+  --primary-focus: rgba(94, 53, 177, 0.125);
+  --primary-inverse: #FFF;
+}
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 0 0 0.5em 0;
-    line-height: 1.2em;
-  }
+/* Deep-purple (Common styles) */
+:root {
+  --font-family: 'Rubik',system-ui,-apple-system,"Segoe UI","Roboto","Ubuntu","Cantarell","Noto Sans",sans-serif,"Noto Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Apple Color Emoji";
 
-  a {
-    color: var(--text-link);
-    text-decoration: none;
-  }
+  --form-element-active-border-color: var(--primary);
+  --form-element-focus-color: var(--primary-focus);
+  --switch-color: var(--primary-inverse);
+  --switch-checked-background-color: var(--primary);
+}
 
-  /* Make images easier to work with */
-  img {
-    max-width: 100%;
-    display: block;
-    margin: 0.5em auto;
-    max-height: var(--width);
-  }
+body>footer, body>header, body>main, section, body>header>nav, body>footer>nav {
+  padding: 0 var(--block-spacing-horizontal);
+}
+article:first-of-type {
+  margin-top:0;
+}
+header>article, footer>article {
+  padding: var(--form-element-spacing-vertical) var(--form-element-spacing-horizontal);
+  margin: var(--nav-element-spacing-vertical) 0;
+}
 
-  figcaption,
-  img + em {
-    text-align: center;
-  }
+i.icon {
+  font-style: normal;
+}
 
-  /* Inherit fonts for inputs and buttons */
-  input,
-  button,
-  textarea,
-  select {
-    font: inherit;
-  }
-
-  /* Left bar on blockquotes */
-  blockquote {
-    margin: 1rem 0;
-    padding: 0 2rem;
-    border-left: 0.2rem solid #777;
-  }
-
-  /* Prevent textarea from overflowing */
-  textarea {
-    width: 100%;
-  }
-
-  /* Styles for inline code or code snippets */
-
-  code,
-  pre,
-  kbd,
-  samp {
-    font-family: "Courier", monospace;
-  }
-  pre {
-    padding: 1rem 1.4rem;
-    max-width: 100%;
-    overflow: auto;
-    border-radius: 4px;
-    background: var(--text-pre-background);
-  }
-  pre code {
-    font-size: 95%;
-    position: relative;
-  }
-  kbd {
-    background: var(--text-pre-background);
-    border: 1px solid hsl(210, 5%, 70%);
-    border-radius: 2px;
-    padding: 2px 4px;
-    font-size: 75%;
-  }
-
-  /* Make table 100% width, add borders between rows */
-  table {
-    border-collapse: collapse;
-    border-spacing: 0;
-    width: 100%;
-    max-width: 100%;
-  }
-  th,
-  td {
-    text-align: left;
-    padding: 0.5rem;
-  }
-  td {
-    border-bottom: 1px solid hsl(0, 0%, 85%);
-  }
-  thead th {
-    border-bottom: 2px solid hsl(0, 0%, 70%);
-  }
-  tfoot th {
-    border-top: 2px solid hsl(0, 0%, 70%);
-  }
-
-  /* h1 size override for consistent size independent of nesting*/
-  h1 {
-    font-size: 2rem;
-    text-align: center;
-  }
-  .task-list-item {
-    list-style-type: none;
-  }
-  article:last-of-type {
-    padding-bottom: 0;
-  }
-  article, article:first-of-type {
-    padding-bottom: 2rem;
-  }
-  p {
-    margin-top: 0;
-  }
-  p:last-of-type {
-    margin-bottom: 0;
-  }
-  nav {
-    display: flex;
-    align-items: flex-end;
-  }
-  #header-title {
-    flex-grow: 1;
-  }
-  #header-title h1 {
-  	text-align: left;
-  	margin-bottom: 0;
-  }
-  nav > a {
-    margin-left: 20px;
-  }
-  header {
-    margin: 1em 0;
-  }
-  header a {
-    color: var(--text-light);
-    text-decoration: none;
-  }
-  header .avatar {
-    vertical-align: bottom;
-    margin-right: 0;
-  }
-  #menu-items a {
-    margin: 0 0.5em;
-  }
-
-  time a {
-    color: var(--text-light);
-    text-decoration: underline;
-  }
-  hr {
-    background: var(--text-main);
-    height: 1px;
-    border: 0;
-  }
-  .avatar {
-    display: inline;
-    max-width: 36px;
-    margin: 0;
-    margin-right: 0.5rem;
-    border-radius: 50%;
-    vertical-align: middle;
-  }
-  .commenter {
-    text-decoration: none;
-    color: var(--text-main);
-    display: inline-block;
-    position: relative;
-  }
-  .like-of::after {
-    content: "⭐️";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  .repost-of::after {
-    content: "🔁";
-    position: absolute;
-    right: 0;
-    bottom: 0;
-  }
-  .reactions {
-    text-align: right;
-    color: var(--text-light);
-  }
-  footer,
-  footer a {
-    text-decoration: none;
-    color: var(--text-light);
-    text-align: center;
-    margin: 1.5rem 0;
-  }
-  .link-context {
-    padding-bottom: 1rem;
-  }
-  .contact-icons {
-    display: flex;
-    justify-content: center;
-  }
-  .contact-icons a {
-    margin: 0.5rem;
-  }
-  svg {
-    vertical-align: text-bottom;
-  }
-  main a:hover {
-    text-decoration: underline;
-    color: var(--text-link);
-  }
-  a:hover,
-  time a:hover {
-    color: red;
-  }
-  .webmention-author {
-    display: flex;
-    align-items: baseline;
-  }
-  .webmention-author time {
-    margin-left: 0.5em;
-  }
-  .webmention-author time a {
-    text-decoration: none;
-  }
-
-  @media screen and (max-width: 450px) {
-    nav {
-      flex-direction: column;
-      align-items: center;
-    }
-    nav section {
-      margin: 6px;
-    }
-  }
+img.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 20px;
+}
+.commenter {
+  text-decoration: none;
+  display: inline-block;
+  position: relative;
+}
+.like-of::after {
+  content: "⭐️";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
+.repost-of::after {
+  content: "🔁";
+  position: absolute;
+  right: 0;
+  bottom: 0;
+}
 </style>
+<script type="text/javascript">
+
+  document.addEventListener("DOMContentLoaded", (event) => {
+    document.querySelectorAll('time').forEach(el => {
+      const timeMs = new Date(el.textContent).getTime()
+      if(!isNaN(timeMs)) {
+        // Get the amount of seconds between the given date and now
+        const deltaSeconds = Math.round((timeMs - Date.now()) / 1000);
+
+        // Array reprsenting one minute, hour, day, week, month, etc in seconds
+        const cutoffs = [60, 3600, 86400, 86400 * 7, 86400 * 30, 86400 * 365, Infinity];
+
+        // Array equivalent to the above but in the string representation of the units
+        const units = ["second", "minute", "hour", "day", "week", "month", "year"];
+
+        // Grab the ideal cutoff unit
+        const unitIndex = cutoffs.findIndex(cutoff => cutoff > Math.abs(deltaSeconds));
+
+        // Get the divisor to divide from the seconds. E.g. if our unit is "day" our divisor
+        // is one day in seconds, so we can divide our seconds by this to get the # of days
+        const divisor = unitIndex ? cutoffs[unitIndex - 1] : 1;
+
+        // Intl.RelativeTimeFormat do its magic
+        const rtf = new Intl.RelativeTimeFormat(navigator.language, { numeric: "auto" });
+        const rtfString = rtf.format(Math.floor(deltaSeconds / divisor), units[unitIndex]);
+
+        el.textContent = rtfString;
+      }
+    })
+  });
+</script>

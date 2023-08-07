@@ -30,6 +30,8 @@ module.exports = {
   author: {
     name: process.env.AUTHOR_NAME,
     email: process.env.AUTHOR_EMAIL,
+    url: new URL(process.env.URL).origin,
+    photo: new URL(process.env.URL).origin + "/images/avatar-tt.svg"
   },
   theme: "basic",
   GITHUB_TOKEN: process.env.GITHUB_TOKEN,

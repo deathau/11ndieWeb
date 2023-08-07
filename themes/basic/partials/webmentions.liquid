@@ -1,40 +1,37 @@
-{% assign reply_counter = 0 %}
-{% assign reaction_counter = 0 %}
-    {% for webmention in webmentions.children %}
-        {% assign target = webmention.wm-target | relative %}
-        {% if target == page.url %}
-<!--List any other reactions-->
-            {% if webmention.wm-property != "in-reply-to" %}
-                {% if reaction_counter == 0 %}
-                    <h2>Reactions</h2>
-                    {% assign reaction_counter = 1 %}
-                {% endif %}
-                {% if webmention.author.url %}<a rel="nofollow" class="commenter {{webmention.wm-property}}" href="{{ webmention.author.url }}" title="{{ webmention.author.name }}, {{webmention.wm-property}}">{% endif %}
-                    {% if webmention.author.photo %}
-                        {% if webmention.author.photo[0].length > 1 %} <img class="avatar" src="{{ webmention.author.photo[0] }}" alt="{{ webmention.author.name }}">
-                        {% else %} <img class="avatar" src="{{ webmention.author.photo }}" alt="{{ webmention.author.name }}">{% endif %}
-                    {% endif %}
-                {% if webmention.author.url %}</a>{% endif %}
+{% assign thisPageMentions = webmentions.children | where: "wm-target", page.url %}
+{% if thisPageMentions.length > 0 %}
+<footer>
+  {% assign reactions = thisPageMentions | wherenot: "wm-property", "in-reply-to" %}
+  {% assign replies = thisPageMentions | where: "wm-property", "in-reply-to" %}
+
+  <!--List any reactions-->
+  {% if reactions.length > 0 %}
+    <nav>
+      <ul>
+        {% for webmention in reactions %}
+          <li>
+            {% if webmention.author.url %}<a rel="nofollow" class="commenter" href="{{ webmention.author.url }}" data-tooltip="{{ webmention.author.name }}, {{webmention.wm-property}}" title="{{ webmention.author.name }}, {{webmention.wm-property}}">{% endif %}
+            <i class="icon {{webmention.wm-property}}"></i>
+            {% if webmention.author.photo %}
+              {% if webmention.author.photo[0].length > 1 %} <img class="avatar" src="{{ webmention.author.photo[0] }}" alt="{{ webmention.author.name }}">
+              {% else %} <img class="avatar" src="{{ webmention.author.photo }}" alt="{{ webmention.author.name }}">{% endif %}
             {% endif %}
-<!--List Comments-->
-            {% if webmention['wm-property'] == "in-reply-to" %}
-                {% if reply_counter == 0 %}
-                    <h2>Comments</h2>
-                    {% assign reply_counter = 1 %}
-                {% endif %}
-            <article>
-                <section class="webmention-author">
-                    <h3>{% if webmention.author.url %}<a rel="nofollow" class="commenter {{webmention.wm-property}}" href="{{ webmention.author.url }}">{% endif %}
-                        {% if webmention.author.photo %}
-                            {% if webmention.author.photo[0].length > 1 %} <img class="avatar" src="{{ webmention.author.photo[0] }}" alt="{{ webmention.author.name }}" width="36" height="36">
-                            {% else %} <img class="avatar" src="{{ webmention.author.photo }}" alt="{{ webmention.author.name }}" width="36" height="36">{% endif %}
-                        {% endif %}
-                        {{ webmention.author.name }}{% if webmention.author.url %}
-                    </a>{% endif %}</h3>
-                    <time><a rel="nofollow" href="{{ webmention.url }}">{{ webmention.published | date() }}</a></time>
-                </section>
-                    {% if webmention.content.html %}<div>{{ webmention.content.html | safe }}</div>{% endif %}
-            </article>
-            {% endif %}
-        {% endif %}
-    {% endfor %}
+            {% if webmention.author.url %}</a>{% endif %}
+          </li>
+        {% endfor %}
+      </ul>
+    </nav>
+  {% endif %}
+  
+  <!--List Comments-->
+  {% for webmention in replies %}
+  {% assign author = webmention.author %}
+  {% assign url = webmention.url %}
+  {% assign date = webmention.published %}
+    <article>
+      {% include partials/authortime.liquid %}
+      {% if webmention.content.html %}<div>{{ webmention.content.html | safe }}</div>{% endif %}
+    </article>
+  {% endfor %}
+</footer>
+{% endif %}
