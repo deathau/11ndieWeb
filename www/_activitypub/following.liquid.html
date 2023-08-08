@@ -1,0 +1,14 @@
+---
+permalink: 'activitypub/following'
+---
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "{{ site.url }}/{{ permalink }}",
+  "type": "OrderedCollection",
+  "totalItems": {{ collections.following.length }},
+  "orderedItems": [{% for follower in collections.following %}
+    "{{ follower.data.id }}"{% if forloop.last == false %},{% else %}
+    {% endif %}
+  {%- endfor -%}
+  ]
+}

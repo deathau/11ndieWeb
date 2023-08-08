@@ -71,6 +71,9 @@ module.exports = function (eleventyConfig) {
   eleventyConfig.addCollection("followers", function (collectionApi) {
     return collectionApi.getFilteredByGlob("./www/followers/**").reverse();
   });
+  eleventyConfig.addCollection("following", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("./www/following/**").reverse();
+  });
   eleventyConfig.addCollection("posts", function (collectionApi) {
     return collectionApi.getFilteredByGlob("./www/posts/**").reverse();
   });
