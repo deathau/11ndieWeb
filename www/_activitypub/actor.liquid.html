@@ -1,5 +1,5 @@
 ---
-permalink: 'activitypub/person'
+permalink: 'actor'
 ---
 {
   "@context": [
@@ -21,7 +21,7 @@ permalink: 'activitypub/person'
     }
   ],
   "type": "Person",
-  "id": "{{ site.url }}",
+  "id": "{{ site.url }}/actor",
   "preferredUsername": "{{ site.author.username }}",
   "url": "{{ site.url }}",
   "name": "{{ site.author.name }}",
@@ -54,4 +54,9 @@ permalink: 'activitypub/person'
   "endpoints": {
     "sharedInbox": "{{ site.url }}/activitypub/inbox"
   },
+  "publicKey": {
+    "id": "{{ site.url }}/actor#main-key",
+    "owner": "{{ site.url }}/actor",
+    "publicKeyPem": "{{ site.ACTOR_PUBLIC_KEY }}"
+  }
 }
