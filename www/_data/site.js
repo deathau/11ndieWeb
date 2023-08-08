@@ -29,6 +29,7 @@ module.exports = {
   logo: "/images/avatar-tt@800.png",
   author: {
     name: process.env.AUTHOR_NAME,
+    username: process.env.AUTHOR_USERNAME,
     email: process.env.AUTHOR_EMAIL,
     url: new URL(process.env.URL).origin,
     photo: new URL(process.env.URL).origin + "/images/avatar-tt.svg"

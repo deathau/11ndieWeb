@@ -39,6 +39,9 @@ module.exports = function (eleventyConfig) {
     url = new URL(url).pathname;
     return url;
   });
+  eleventyConfig.addFilter("capitalise", function (value) {
+      return value.charAt(0).toUpperCase() + value.slice(1);
+  });
   eleventyConfig.addFilter("pluralize", function (value) {
     switch (value) {
       case "reply":
@@ -65,6 +68,9 @@ module.exports = function (eleventyConfig) {
   });
 
   // Collections
+  eleventyConfig.addCollection("followers", function (collectionApi) {
+    return collectionApi.getFilteredByGlob("./www/followers/**").reverse();
+  });
   eleventyConfig.addCollection("posts", function (collectionApi) {
     return collectionApi.getFilteredByGlob("./www/posts/**").reverse();
   });

@@ -1,0 +1,32 @@
+---
+permalink: '.well-known/webfinger'
+---
+{
+  "subject": "acct:{{ site.author.username }}@{{ site.domain }}",
+  "aliases": [
+    "{{ site.url }}",
+    "{{ site.url }}/activitypub/person"
+  ],
+  "links": [
+    {
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html",
+      "href": "{{ site.author.url }}"
+    },
+    {
+      "rel": "http://webfinger.net/rel/avatar",
+      "type": "",
+      "href": "{{ site.author.photo }}"
+    },
+    {
+      "rel": "canonical_uri",
+      "type": "text/html",
+      "href": "{{ site.author.url }}"
+    },
+    {
+      "rel": "self",
+      "type": "application/activity+json",
+      "href": "{{ site.url }}/activitypub/person"
+    }
+  ]
+}

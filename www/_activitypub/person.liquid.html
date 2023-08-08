@@ -1,0 +1,57 @@
+---
+permalink: 'activitypub/person'
+---
+{
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    {
+      "schema": "http://schema.org#",
+      "toot": "http://joinmastodon.org/ns#",
+      "PropertyValue": "schema:PropertyValue",
+      "value": "schema:value",
+      "alsoKnownAs": {
+        "@id": "as:alsoKnownAs",
+        "@type": "@id"
+      },
+      "movedTo": {
+        "@id": "as:movedTo",
+        "@type": "@id"
+      },
+      "discoverable": "toot:discoverable"
+    }
+  ],
+  "type": "Person",
+  "id": "{{ site.url }}",
+  "preferredUsername": "{{ site.author.username }}",
+  "url": "{{ site.url }}",
+  "name": "{{ site.author.name }}",
+  "summary": "This is an EXPERIMENTAL implementation for a read-only ActivityPub feed of my blog.",
+  "icon": {
+    "type": "Image",
+    "mediaType": "image/svg",
+    "url": "{{ site.author.photo }}"
+  },
+  "image": {},
+  "tag": [],
+  "attachment": [
+    {
+      "type": "PropertyValue",
+      "name": "Web",
+      "value": "<a href=\"{{ site.url }}\">{{ site.domain }}</a>"
+    }
+  ],
+  "alsoKnownAs": [
+    "https://pkm.social/@death_au"
+  ],
+  "inbox": "{{ site.url }}/inbox",
+  "outbox": "{{ site.url }}/outbox",
+  "following": "{{ site.url }}/following",
+  "followers": "{{ site.url }}/followers",
+  "discoverable": true,
+  "manuallyApprovesFollowers": true,
+  "published": "2023-08-08T12:00:00+10:00",
+  "updated": "{{ page.date }}",
+  "endpoints": {
+    "sharedInbox": "{{ site.url }}/inbox"
+  },
+}
