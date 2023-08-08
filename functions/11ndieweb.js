@@ -1,5 +1,5 @@
 const options = {"functionsDirectory":"functions","dataDirectory":"www/_data","acceptedDomains":["fluffy-lily-cef646.netlify.app","monrepos.online"],"tokenEndpoint":"https://tokens.indieauth.com/token"};
-const indieweb = require("eleventy-plugin-11ndieweb");
+const indieweb = require("./indieweb/indieweb.js");
 
 function getGithubInfo(info) {
   let github;
