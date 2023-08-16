@@ -1,0 +1,30 @@
+---
+permalink: '.well-known/nodeinfo'
+---
+{
+  "version": "2.0",
+  "software": {
+    "name": "11ty-activitypub",
+    "version": "0.1"
+  },
+  "protocols": [
+    "activitypub"
+  ],
+  "services": {
+    "inbound": [],
+    "outbound": [
+      "atom1.0",
+      "rss2.0"
+    ]
+  },
+  "openRegistrations": false,
+  "usage": {
+    "users": {
+      "total": 1
+    },
+    "localPosts": {{ collections.posts.length }}
+  },
+  "metadata": {
+    "nodeName": "Mon Repos"
+  }
+}

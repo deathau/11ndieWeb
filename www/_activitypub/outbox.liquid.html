@@ -1,0 +1,99 @@
+---
+permalink: 'activitypub/outbox'
+---
+{
+    "@context": [
+        "https://www.w3.org/ns/activitystreams",
+        {
+            "@language": "en"
+        }
+    ],
+    "summary": "{{ site.title }} outbox",
+    "type": "OrderedCollection",
+    "totalItems": {{ collections.posts.length }},
+    "orderedItems": [
+        {% for post in collections.posts %}
+        {
+            "@context": ["https://www.w3.org/ns/activitystreams"],
+            "id": "{{ site.url }}{{ post.url }}",
+            "url": "{{ site.url }}{{ post.url }}",
+            "type": "{{ post.data.type | capitalise }}",
+            "attributedTo": "{{ site.author.url }}"
+            "inReplyTo": {% if post.data.in-reply-to %}{{ post.data.in-reply-to }}{% else %}null{% endif %},
+            "published": "{{ post.date | date: 'iso' }}",
+            "to": [
+                "https://www.w3.org/ns/activitystreams#Public"
+            ],
+            "cc": [
+                "{{ site.url }}/followers"
+            ]
+            {% case post.data.type %}
+            {% when 'article' %}
+            "name": "{{ post.data.title }}",
+            "nameMap": {
+                "en": "{{ post.data.title }}",
+            },
+            "content": "{{ post.templateContent | replace: '"', '\"' | strip_newlines }}",
+            "contentMap": {
+                "en": "{{ post.templateContent | replace: '"', '\"' | strip_newlines }}"
+            }
+            {% when 'bookmark' %}
+            "name": "Bookmarked {{ post.data.bookmark-of }}",
+            "nameMap": {
+                "en": "Bookmarked {{ post.data.bookmark-of }}",
+            },
+            "content": "<em>Bookmarked <a class=\"u-bookmark-of\" href=\"{{ post.data.bookmark-of }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}",
+            "contentMap": {
+                "en": "<em>Bookmarked <a class=\"u-bookmark-of\" href=\"{{ post.data.bookmark-of }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}"
+            }
+            {% when 'favorite' %}
+            "name": "Favorited {{ post.data.like-of }}",
+            "nameMap": {
+                "en": "Favorited {{ post.data.like-of }}",
+            },
+            "content": "{% include icons/bookmark.svg %} <em><a class=\"u-like-of\" href=\"{{ post.data.like-of }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}",
+            "contentMap": {
+                "en": "{% include icons/bookmark.svg %} <em><a class=\"u-like-of\" href=\"{{ post.data.like-of }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}"
+            }
+            {% when 'reply' %}
+            "name": "Replied to {{ post.data.in-reply-to }}",
+            "nameMap": {
+                "en": "Replied to {{ post.data.in-reply-to }}",
+            },
+            "content": "<em>Replied to <a class=\"u-in-reply-to\" href=\"{{ post.data.in-reply-to }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}",
+            "contentMap": {
+                "en": "<em>Replied to <a class=\"u-in-reply-to\" href=\"{{ post.data.in-reply-to }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}"
+            }
+            {% when 'repost' %}
+            "name": "Shared {{ post.data.repost-of }}",
+            "nameMap": {
+                "en": "Shared {{ post.data.repost-of }}",
+            },
+            "content": "<em>Shared <a class=\"u-repost-of\" href=\"{{ post.data.repost-of }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}",
+            "contentMap": {
+                "en": "<em>Shared <a class=\"u-repost-of\" href=\"{{ post.data.repost-of }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}"
+            }
+            {% when 'rsvp' %}
+            "name": "RSVP'd {{ post.data.rsvp }} to {{ post.data.in-reply-to }}",
+            "nameMap": {
+                "en": "RSVP'd {{ post.data.rsvp }} to {{ post.data.in-reply-to }}",
+            },
+            "content": "<em>RSVP'd {{ post.data.rsvp }} to <a class=\"u-in-reply-to\" href=\"{{ post.data.in-reply-to }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}",
+            "contentMap": {
+                "en": "<em>RSVP'd {{ post.data.rsvp }} to <a class=\"u-in-reply-to\" href=\"{{ post.data.in-reply-to }}\">{{ post.data.title }}</a></em>{{ post.templateContent | replace: '"', '\"' | strip_newlines }}"
+            }
+            {% else %}
+            "name": "{{ post.data.type | capitalise }} from {{ post.date | date }}",
+            "nameMap": {
+                "en": "{{ post.data.type | capitalise }} from {{ post.date | date }}",
+            },
+            "content": "{{ post.templateContent | replace: '"', '\"' | strip_newlines }}",
+            "contentMap": {
+                "en": "{{ post.templateContent | replace: '"', '\"' | strip_newlines }}"
+            }
+            {% endcase -%}
+
+        }{% if forloop.last == false %},{% else %}{% endif %}
+    {%- endfor -%}
+    ]
+}

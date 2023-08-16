@@ -18,6 +18,10 @@ package = "netlify-plugin-inline-functions-env"
   to = "/.netlify/functions/11ndieweb"
   status = 200
 [[redirects]]
+  from = "/activitypub/:function"
+  to = "/.netlify/functions/activitypub"
+  status = 200
+[[redirects]]
   from = "/.well-known/host-meta*"
   to = "https://fed.brid.gy/.well-known/host-meta:splat"
   status = 302
